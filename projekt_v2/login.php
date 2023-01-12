@@ -14,14 +14,14 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 <body>
 <div id="nav">
     <?php
-        require("nav.php");
-        require ("plausi.inc.php");
+        @include("nav.php");
+        @include("plausi.inc.php");
     ?>
 </div>
 <div id="content">
     <h1>Login</h1>
     <?php
-        require('login.inc.php');   // Formular Login
+        @include('login.inc.php');   // Formular Login
 
         class Login {
             public function _login() {
@@ -46,7 +46,7 @@ if (0 > version_compare(PHP_VERSION, '7')) {
                     return false;
             }
             private function anmelden_db() {
-                require "db.inc.php";
+                @include("db.inc.php");
                 $vorhanden = false;
 
                 if ($stmt = $pdo -> prepare("SELECT userid, pw FROM mitglieder")) {

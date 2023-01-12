@@ -9,6 +9,10 @@ setcookie("Image2Food", $currTime, $currTime + (3600 * 24 * 120));
 if (0 > version_compare(PHP_VERSION, '7')) {
     die('<h1>Für diese Anwendung ' . 'ist mindestens PHP 7 notwendig</h1>');
 }
+
+// Eigene Exeption Klasse definieren, Exception erweitern
+class MeineAusnahme extends Exception {}
+
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -20,11 +24,23 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 <body>
 <div id="nav">
     <?php
-    if (isset($_SESSION["login"]) && ($_SESSION["login"] == "true")) {
-        require ("navmitglieder.php");
-    } else {
-        require ("nav.php");
-    }
+        try {
+            if (isset($_SESSION["login"]) && ($_SESSION["login"] == "true")) {
+                if (!@include("navmitglieder.php")) {
+                    throw new MeineAusnahme();
+                }
+            } else {
+                if (!@include("nav.php")) {
+                    throw new MeineAusnahme();
+                }
+            }
+        } catch (MeineAusnahme $me) {
+            $meldung = "<h2>Image2Food – Sag mir, was ich daraus kochen kann</h2>";
+            $meldung .= "<h3>Leider gibt es ein Problem mit der Webseite. ";
+            $meldung .= "Wir arbeiten daran mit Hochdruck.</h3> ";
+            $meldung .= "<p>Besuchen Sie uns in Kürze wieder neu.</p>";
+            die($meldung);
+        }
     ?>
 </div>
 <div id="content">
