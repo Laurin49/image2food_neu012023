@@ -1,8 +1,5 @@
 <?php
-/**
- * Festlegung der Untergrenze für die PHP-Version
- * @version: 1.0
- */
+session_start();
 if (0 > version_compare(PHP_VERSION, '7')) {
     die('<h1>Für diese Anwendung ' . 'ist mindestens PHP 7 notwendig</h1>');
 }
@@ -17,21 +14,26 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 <body>
     <div id="nav">
         <?php
-        require("nav.php");
+            if (isset($_SESSION["login"]) && ($_SESSION["login"] == "true")) {
+                require ("navmitglieder.php");
+            } else {
+                require ("nav.php");
+            }
         ?>
     </div>
     <div id="content">
-
         <h1>Image2Food – Sag mir, was ich daraus kochen kann</h1>
         <h2>Das soziale, multimediale Netzwerk für Kochideen</h2>
         <?php
-        /**
-         * Image2Food
-         * Das soziale Netzwerk für Kochideen
-         * Die Einstiegsseite mit der Hauptklasse
-         */
-        class Index {
-        }
+            class Index {
+                function besucher() {
+                    echo "<div id='indextext'>Willkommen " . "auf unserer Webseite. " . "Schauen Sie sich um. " .
+                        "Sie können sich hier registrieren und dann " . "in einem geschlossenen " .
+                        "Mitgliederbereich anmelden.</div>";
+                }
+            }
+            $indexObj = new Index();
+            $indexObj->besucher();
         ?>
     </div>
 </body>

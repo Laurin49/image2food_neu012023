@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (0 > version_compare(PHP_VERSION, '7')) {
     die('<h1>Für diese Anwendung ' . 'ist mindestens PHP 7 notwendig</h1>');
 }
@@ -45,7 +46,28 @@ if (0 > version_compare(PHP_VERSION, '7')) {
                     return false;
             }
             private function anmelden_db() {
+                require "db.inc.php";
+                $vorhanden = false;
 
+                if ($stmt = $pdo -> prepare("SELECT userid, pw FROM mitglieder")) {
+                    $stmt -> execute();
+                    while ($row = $stmt -> fetch()) {
+                        if (isset($_POST["userid"])
+                            && $_POST["userid"] == $row['userid']
+                            && md5($_POST["pw"]) == $row['pw']) {
+                            $vorhanden = true;
+                            break;
+                        }
+                    }
+                }
+                if ($vorhanden) {
+                    $_SESSION["name"] = $_POST["userid"];
+                    $_SESSION["login"] = "true";
+                    $dat = "index.php";
+                } else {
+                    $dat = "loginfehler.php";
+                }
+                header("Location: $dat");
             }
         }
         $loginObj = new Login();
