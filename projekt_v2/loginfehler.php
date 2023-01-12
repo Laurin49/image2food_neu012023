@@ -14,13 +14,13 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 <body>
 <div id="nav">
     <?php
-    @include ("nav.php");
+    @include("nav.php");
     ?>
 </div>
 <div id="content">
     <h1>Login-Fehler</h1>
     <?php
-    @include ("login.inc.php");
+    @include("login.inc.php");
 
     class LoginFehler
     {

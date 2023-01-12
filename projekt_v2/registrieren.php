@@ -14,8 +14,8 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 <body>
     <div id="nav">
         <?php
-            require("nav.php");
-            require("plausi.inc.php");
+            @include("nav.php");
+            @include("plausi.inc.php");
         ?>
     </div>
     <div id="content">
@@ -23,7 +23,7 @@ if (0 > version_compare(PHP_VERSION, '7')) {
         <h1>Registrierung</h1>
         <?php
             // Registrierung Formular
-            require("registrieren.inc.php");
+            @include("registrieren.inc.php");
 
             class Registrierung {
                 public function registrieren() {
@@ -57,7 +57,7 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 
                 }
                 private function eintragen_db() {
-                    require "db.inc.php";
+                    @include("db.inc.php");
                     $sql = "INSERT INTO mitglieder (name, vorname, email, zusatzinfos, rolle, userid, pw)";
                     $sql .= " VALUES (:name, :vorname, :email, :zusatzinfos, :rolle, :userid, :pw)";
                     // echo "SQL: " . $sql . "<br />";
