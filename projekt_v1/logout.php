@@ -5,6 +5,7 @@ session_start();
 class Off {
     function ausloggen() {
         session_destroy();
+//        $_SESSION['login'] = "false";
         $dat = "index.php";
         header("Location: $dat");
     }
