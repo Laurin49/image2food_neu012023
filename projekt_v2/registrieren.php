@@ -42,20 +42,21 @@ if (0 > version_compare(PHP_VERSION, '7')) {
 
                     $anmelden += $p -> nutzerdatentest($_POST['userid']);
                     $anmelden += $p -> nutzerdatentest($_POST['pw']);
+                    $anmelden += $p -> captchatest($_POST['captcha']);
 
                     // Kritische Zeichen auf der freien Eingabe der Zusatzinfos eleminieren
                     $_POST['zusatzinfos'] = preg_replace("/[<|>|$|%|&|§]/", "#", $_POST['zusatzinfos']);
 
-                    // Testausgaben für den derzeitigen Stand des Projekts
-                    echo "Die Eingaben: <hr>";
-                    print_r($_POST);
-                    echo "<br>Fehleranzahl: " . $anmelden . "<hr>";
+                    //  Testausgaben für den derzeitigen Stand des Projekts
+                    //  echo "Die Eingaben: <hr>";
+                    //  print_r($_POST);
+                    //  echo "<br>Fehleranzahl: " . $anmelden . "<hr>";
                     if ($anmelden == 0)
                         return true;
                     else
                         return false;
-
                 }
+
                 private function eintragen_db() {
                     @include("db.inc.php");
                     $sql = "INSERT INTO mitglieder (name, vorname, email, zusatzinfos, rolle, userid, pw)";

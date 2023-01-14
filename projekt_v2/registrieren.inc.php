@@ -1,5 +1,4 @@
 <form action="registrieren.php" method="post">
-
     <label class="reg_label">Name</label><span class="pflichtmarker"> * </span>
     <input name="name" maxlength="30"
         <?php
@@ -35,6 +34,12 @@
         if (isset($_POST['zusatzinfos']))
             echo $_POST['zusatzinfos'];
         ?></textarea>
+    <br>
+    <br>
+    <img src="captchagenerieren.php" alt="Captcha"><br>
+    <label class="reg_label">Captcha</label>
+    <span class="pflichtmarker"> * </span>
+    <input name="captcha">
     <br>
     <input type="submit">
 </form>

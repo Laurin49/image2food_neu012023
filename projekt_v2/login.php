@@ -35,6 +35,7 @@ if (0 > version_compare(PHP_VERSION, '7')) {
                 $p = new Plausi();
                 $anmelden += $p->nutzerdatentest($_POST['userid']);
                 $anmelden += $p->nutzerdatentest($_POST['pw']);
+                $anmelden += $p -> captchatest($_POST['captcha']);
 
                 // Testausgaben
                 echo "Ihre Eingaben: <hr>";
