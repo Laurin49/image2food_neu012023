@@ -53,6 +53,7 @@ class MeineAusnahme extends Exception {}
                 // Benutzer erfolgreich angemeldet => login
                 echo "<div id='indextext'>Sie sind erfolgreich angemeldt.</div>";
                 @include("uploadformular.inc.php");
+                echo "<a href='vorschaubilder.php'" ." target='vorschau'>Vorschau</a>";
             }
             else if (isset($_SESSION['login']) && $_SESSION['login'] == "false") {
                 // Benutzer registriert aber nicht eingeloggt
