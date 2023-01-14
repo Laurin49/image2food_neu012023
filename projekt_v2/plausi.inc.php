@@ -39,4 +39,11 @@ class Plausi {
         }
         return $fehler;
     }
+
+    public function captchatest($wert) {
+        $fehler = 0;
+        if ($_SESSION['captchacode'] != $wert) {
+            return ++$fehler;
+        }
+    }
 }
